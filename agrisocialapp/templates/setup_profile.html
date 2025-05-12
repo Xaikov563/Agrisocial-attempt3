@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Complete Your Profile</h2>
+
+    <form method="post" enctype="multipart/form-data" class="space-y-5">
+        {% csrf_token %}
+
+        <!-- Bio -->
+        <div>
+            <label for="id_bio" class="block mb-2 text-sm font-medium text-gray-700">Bio</label>
+            <textarea name="bio" id="id_bio" rows="4"
+                class="block w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">{{ form.bio.value }}</textarea>
+        </div>
+
+        <!-- Location -->
+        <div>
+            <label for="id_location" class="block mb-2 text-sm font-medium text-gray-700">Location</label>
+            <input type="text" name="location" id="id_location"
+                value="{{ form.location.value }}"
+                class="block w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <!-- Profile Picture -->
+        <div>
+            <label for="id_profile_picture" class="block mb-2 text-sm font-medium text-gray-700">Profile Picture</label>
+            <input type="file" name="profile_picture" id="id_profile_picture"
+                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit"
+                class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-6 py-2.5 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                Save Profile
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

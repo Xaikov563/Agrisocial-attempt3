@@ -1,0 +1,79 @@
+{% load static %}   
+{% block title %}AgriSocial{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include 'navbarlanding.html' %}  <!-- Navbar -->
+
+
+<link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+<div class="max-w-3xl mx-auto mt-24 px-4">
+    <h1 class="text-4xl font-bold text-center mb-10">Frequently Asked Questions</h1>
+
+    <div id="accordion-collapse" data-accordion="collapse" class="space-y-4">
+
+        <!-- FAQ 1 -->
+        <div class="border border-gray-200 rounded-lg">
+            <h2 id="faq1-heading">
+                <button type="button" class="flex items-center justify-between w-full px-5 py-4 text-left text-lg font-medium text-gray-900 bg-gray-100 rounded-t-lg hover:bg-gray-200 focus:ring-2 focus:ring-blue-200" data-accordion-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                    How do I create an account?
+                    <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+            </h2>
+            <div id="faq1" class="hidden px-5 py-4 bg-white">
+                <p>Click the "Sign Up" button in the top-right corner and fill out the form to create a new account.</p>
+            </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="border border-gray-200 rounded-lg">
+            <h2 id="faq2-heading">
+                <button type="button" class="flex items-center justify-between w-full px-5 py-4 text-left text-lg font-medium text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-2 focus:ring-blue-200" data-accordion-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                    How can I reset my password?
+                    <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+            </h2>
+            <div id="faq2" class="hidden px-5 py-4 bg-white">
+                <p>Click on "Forgot Password" at the login page. Follow the instructions to reset your password via email.</p>
+            </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="border border-gray-200 rounded-lg">
+            <h2 id="faq3-heading">
+                <button type="button" class="flex items-center justify-between w-full px-5 py-4 text-left text-lg font-medium text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-2 focus:ring-blue-200" data-accordion-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                    How do I post or share content?
+                    <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+            </h2>
+            <div id="faq3" class="hidden px-5 py-4 bg-white">
+                <p>Navigate to the "Posts Feed" section, and use the post box at the top to share text, images, or links.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+
+{% include 'footer.html' %}  <!-- Footer -->
+
+{% endblock %}
+
+
+
+</body>
+</html>
+
+

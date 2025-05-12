@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}   
+{% block title %}AgriSocial{% endblock %}
+
+
+{% block content %}
+{% include "navbar.html" %}
+
+  <h6 style="text-align: center; font-size: 3rem; font-weight:bold; margin-top: 6rem; margin-bottom: 2rem;"></h6>
+
+    <h6 style="text-align: center; font-size: 3rem; font-weight:bold; margin-top: 6rem; margin-bottom: 2rem;">Subscriptions</h6>
+
+
+
+<div class="container mx-auto  px-4 py-6 flex justify-center flex-wrap gap-6">
+
+<!--FREE TIER-->
+<div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+<h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Free Tier Subscirption</h5>
+<div class="flex items-baseline text-gray-900 dark:text-white">
+<span class="text-3xl font-semibold"></span>
+<span class="text-5xl font-extrabold tracking-tight">Free</span>
+<span class="ms-1 text-xl font-normal text-gray-500 dark:text-gray-400"></span>
+</div>
+<ul role="list" class="space-y-5 my-7">
+
+<!--Availavble list-->
+<li class="flex items-center">
+<svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+</svg>
+<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Add up to 3 Products to the Marketplace</span>
+</li>
+<li class="flex">
+<svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+</svg>
+<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Posting Features</span>
+</li>
+<li class="flex">
+<svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+</svg>
+<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Real-Time Messaging Features</span>
+</li>
+<li class="flex">
+<svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+</svg>
+<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Access to the marketplace</span>
+</li>
+<button type="button" disabled
+    class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 cursor-not-allowed opacity-50 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 inline-flex justify-center w-full text-center">
+Default</button>
+</div>
+
+<!--PREMIUM TIER-->
+
+<div class="flex justify-center">
+<div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+<h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Premium Tier Subscirption</h5>
+<div class="flex items-baseline text-gray-900 dark:text-white">
+<span class="text-3xl font-semibold"></span>
+<span class="text-5xl font-extrabold tracking-tight">₱99</span>
+<span class="ms-1 text-xl font-normal text-gray-500 dark:text-gray-400">/month</span>
+</div>
+<ul role="list" class="space-y-5 my-7">
+
+<!--Availavble list-->
+<li class="flex items-center">
+<svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+</svg>
+<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">All Features in Free Tier</span>
+</li>
+<li class="flex items-center">
+<svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+</svg>
+<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Can add any number of Products</span>
+</li>
+<li class="flex">
+<svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+</svg>
+<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Priority marketplace listing</span>
+</li>
+<li class="flex">
+<svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+</svg>
+<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Advanced Analytics for Farmers</span>
+</li>
+<li class="flex">
+<svg class="shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+</svg>
+<span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Removed Ads</span>
+</li>
+
+
+{% if not request.user.userprofile.has_membership %}
+    <form action="{% url 'claim_membership' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Purchase Subscription</button>
+    </form>
+{% else %}
+    <button type="button" disabled
+    class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 cursor-not-allowed opacity-50 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 inline-flex justify-center w-full text-center">
+    Paid
+    </button>
+{% endif %}
+
+
+</div>
+</div>
+</div>
+
+
+
+{% endblock %}

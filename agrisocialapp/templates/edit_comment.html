@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
+    <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Edit Your Comment</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="mb-4">
+            {{ form.content.label_tag }}
+            {{ form.content }}
+            {{ form.content.errors }}
+        </div>
+
+        <div class="mb-4">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+            {{ form.image.errors }}
+        </div>
+
+        <div class="flex justify-between">
+            <a href="{% url 'postsfeed' %}" class="text-blue-500 hover:underline">← Cancel</a>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                Save Changes
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

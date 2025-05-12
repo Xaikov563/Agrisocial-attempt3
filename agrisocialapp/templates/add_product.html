@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="max-w-xl p-6 mx-auto rounded-lg shadow-md mt-10">
+    <a href="{% url 'user_shop_view' user.id %}" class="text-blue-500 hover:underline">← Cancel</a>
+
+    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Add New Product</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+        
+        <!-- Render non-field errors -->
+        {% if form.non_field_errors %}
+            <div class="text-red-600 text-sm">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <!-- Title -->
+        <div>
+            <label for="id_title" class="block text-sm font-medium text-gray-700">Product Title</label>
+            {{ form.title }}
+            {{ form.title.errors }}
+        </div>
+
+        <!-- Description -->
+        <div>
+            <label for="id_description" class="block text-sm font-medium text-gray-700">Description</label>
+            {{ form.description }}
+            {{ form.description.errors }}
+        </div>
+
+        <!-- Price -->
+        <div>
+            <label for="id_price" class="block text-sm font-medium text-gray-700">Price (₱)</label>
+            {{ form.price }}
+            {{ form.price.errors }}
+        </div>
+
+        <!-- Location -->
+        <div>
+            <label for="id_location" class="block text-sm font-medium text-gray-700">Location (optional)</label>
+            {{ form.location }}
+            {{ form.location.errors }}
+        </div>
+
+        <!-- Stock -->
+        <div>
+            <label for="id_stock" class="block text-sm font-medium text-gray-700">Stock</label>
+            {{ form.stock }}
+            {{ form.stock.errors }}
+        </div>
+
+        <!-- Image Upload -->
+        <div>
+            <label for="id_image" class="block text-sm font-medium text-gray-700">Product Image</label>
+            {{ form.image }}
+            {{ form.image.errors }}
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-4">
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                Add Product
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

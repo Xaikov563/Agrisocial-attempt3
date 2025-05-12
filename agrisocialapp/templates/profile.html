@@ -1,0 +1,435 @@
+{% extends 'base.html' %}
+{% load static %}   
+{% block title %}AgriSocial{% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+
+
+ 
+<h6 style="text-align: center; font-size: 3rem; font-weight:bold; margin-top: 6rem; margin-bottom: 2rem;"></h6>
+    
+<!-- Notificaton when posting, deleting and editing -->
+{% if messages %}
+{% for message in messages %}
+<div id="alert-3" class="flex items-center p-4 mb-4 
+    {% if message.tags == 'success' %} text-green-800 bg-green-50 dark:bg-gray-800 dark:text-green-400 {% endif %}
+    rounded-lg" role="alert">
+  
+    <svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+    </svg>
+    
+    <span class="sr-only">Info</span>
+    <div class="ms-3 text-sm font-medium">
+      {{ message }}
+    </div>
+    
+    <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700" onclick="this.parentElement.style.display='none';">
+      <span class="sr-only">Close</span>
+      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+      </svg>
+    </div>
+</button>
+{% endfor %}
+{% endif %}
+
+
+<!-- Profile Header -->
+ <div class="max-w-4xl mx-auto bg-white shadow-sm rounded-lg overflow-hidden">
+    <!-- Cover Photo -->
+    <div class="relative h-48">
+        <img class="absolute inset-0 w-full h-full object-cover" src="{% static 'images/cover_default.jpg' %}" alt="Cover Photo">
+    </div>
+
+    <!-- Profile Section -->
+    <div class="relative p-6 bg-white">
+        <!-- Profile Picture -->
+        <div style="z-index: 20px; position: absolute; top: -90px; left: 20px;">
+            <img class="w-32 h-32 rounded-full border-4 border-white shadow-md object-cover" src="{% static 'images/pfp_default.png' %}" alt="Profile Picture">
+        </div>
+
+        <!-- Profile Info and Actions -->
+        <div class="ml-40 mt-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h2 class="text-2xl font-bold">
+                            {{ userprofile.user.first_name }} {{ userprofile.user.last_name }}
+                        </h2>
+                        {% if userprofile.user.userprofile.has_membership %}
+                            <svg class="w-6 h-6 text-blue-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z" clip-rule="evenodd"/>
+</svg>
+
+                        {% endif %}
+                    </div>
+                    <p class="text-gray-500">@{{ userprofile.user.username }}</p>
+                    <p class="text-gray-600 mt-1">{{ userprofile.user.userprofile.bio }}</p>
+                    <p class="text-gray-600 font-semibold">Location: {{ userprofile.user.userprofile.location }}</p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-2 mt-4 sm:mt-0">
+                    {% if request.user == userprofile.user %}
+                        <a href="{% url 'edit_profile' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold">
+                            Edit Profile
+                        </a>
+                    {% else %}
+                        <a href="{% url 'chat_detail' userprofile.user.id %}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-semibold">
+                            Message
+                        </a>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {% if userprofile in request.user.userprofile.follows.all %}
+                                <button type="submit" name="follow" value="unfollow" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded font-semibold">
+                                    Unfollow
+                                </button>
+                            {% else %}
+                                <button type="submit" name="follow" value="follow" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded font-semibold">
+                                    Follow
+                                </button>
+                            {% endif %}
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        
+
+<!-- Tab Navigation -->
+<div class="mt-6 overflow-x-auto">
+    <ul class="flex space-x-6 p-4 text-gray-600 font-semibold min-w-max">
+        <li class="cursor-pointer hover:text-blue-500 active text-blue-500" id="posts-tab" onclick="showTab('posts')">Posts</li>
+        <li class="cursor-pointer hover:text-blue-500" id="following-tab" onclick="showTab('following')">Following</li>
+        <li class="cursor-pointer hover:text-blue-500" id="followers-tab" onclick="showTab('followers')">Followers</li>
+        <li class="cursor-pointer hover:text-blue-500" id="settings-tab" onclick="showTab('settings')">Likes</li>
+    </ul>
+</div>
+
+<!-- Tab Content Connected to the Post, Following, Followers, Likes Tab-->
+<div id="tab-content" class="">
+
+    <!-- Posts Section -->
+    <div id="posts" class="tab-section">
+    <h3 class="text-lg font-bold mb-4">{{ userprofile.user.first_name }}'s Posts</h3>
+
+    <!-- Post Card-->
+    <div class="w-full max-w-4xl mx-auto">
+        {% for post in posts %}
+        <div class="post w-full">
+            <div class="bg-white mb-6 shadow p-5 rounded-lg">
+                <!-- Post Header -->
+                <div class="flex items-center justify-between">
+                    <!-- Author Info -->
+                    <div class="flex items-center space-x-4">
+                        <img class="w-10 h-10 rounded-full" src="{% static 'images/logoIcon.png' %}" alt="User avatar">
+                        <div>
+                            <h5 class="font-bold">{{ post.author.first_name }} {{ post.author.last_name }}</h5>
+                            <p class="text-sm text-gray-500">{{ post.author.username }} - {{ post.created_at|date:"F j, Y, g:i a" }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown -->
+                    {% if request.user == post.author %}
+                    <div class="relative">
+                        <button onclick="toggleDropdown('{{ post.id }}')" class="p-2 rounded-lg hover:bg-gray-100">
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                            </svg>
+                        </button>
+                        <div id="dropdown-{{ post.id }}" class="absolute right-0 mt-2 w-40 bg-white shadow-md rounded-lg hidden">
+                            <ul class="py-2 text-sm text-gray-700">
+                                <li><a href="{% url 'edit_post' post.id %}?next=profile" class="block px-4 py-2 hover:bg-gray-100">✏️ Edit</a></li>
+                                <li>
+                                    <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+                                        type="submit"
+                                        class="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100">
+                                        🗑️ Delete
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Post Body -->
+                <p class="mt-3 text-gray-700">{{ post.content }}</p>
+                <img class="mt-3 rounded-lg w-full object-cover" src="{% static 'images/post_default.jpg' %}" alt="Post Image">
+                <p class="mt-3 text-gray-700">
+                    <span class="like-count">{{ post.likes.count }}</span> Likes
+                </p>
+
+                <!-- Post Actions -->
+                <div class="flex justify-between items-center mt-4 flex-wrap gap-2">
+                    <!-- Like Button -->
+                    <form class="like-form" data-post-id="{{ post.id }}" method="POST" action="{% url 'like_post' post.id %}">
+                        {% csrf_token %}
+                        {% if post.liked_by_user %}
+                        <button type="submit" class="like-button text-white font-bold flex items-center p-2 rounded-lg bg-blue-500 hover:bg-blue-700 text-sm sm:text-base">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z"/>
+                            </svg>
+                            Liked
+                        </button>
+                        {% else %}
+                        <button type="submit" class="like-button text-white font-bold flex items-center p-2 rounded-lg bg-blue-500 hover:bg-blue-700 text-sm sm:text-base">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+                            </svg>
+                            Like
+                        </button>
+                        {% endif %}
+                    </form>
+
+                    <!-- Comment Button -->
+                    <a href="{% url 'comment_view' post.id %}" class="text-sm sm:text-base flex items-center text-gray-50 hover:underline p-3 rounded-lg bg-gray-300 hover:bg-gray-200 no-underline" style="text-decoration: none;">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 10.5h.01m-4.01 0h.01M8 10.5h.01M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.6a1 1 0 0 0-.69.275l-2.866 2.723A.5.5 0 0 1 8 18.635V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
+                        </svg>
+                        <span class="text-sm font-medium text-gray-900 dark:text-white">Comments</span>
+                      </a>
+
+                    <!-- Re-share Button -->
+                    <button class="text-sm sm:text-base flex items-center text-gray-50 hover:underline p-3 rounded-lg bg-gray-300 hover:bg-gray-200 no-underline" style="text-decoration: none;">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-gray-800 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
+                        </svg>
+                        Re-share
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <h5 class="text-gray-500">No posts yet.</h5>
+        {% endfor %}
+    </div>
+</div>
+
+
+    <!-- Following Section -->
+    <div id="following" class="tab-section hidden p-4">
+        <h3 class="text-lg font-bold mb-4">Following</h3>
+        <ul>
+            {% for following in userprofile.follows.all %}
+            <li class="flex items-center py-2 border-b">
+                <img class="w-8 h-8 rounded-full mr-3" src="{% static 'images/logoIcon.png' %}" alt="{{ following.username }}'s Avatar">
+                <span class="text-gray-700">{{ following.user.first_name }} {{ following.user.last_name }}</span>
+            </li>
+            {% empty %}
+            <li class="text-gray-500">Not following anyone yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Followers Section -->
+    <div id="followers" class="tab-section hidden p-4">
+        <h3 class="text-lg font-bold mb-4">Followers</h3>
+        <ul>
+            {% for follower in userprofile.followed_by.all %}
+            <li class="flex items-center py-2 border-b">
+                <img class="w-8 h-8 rounded-full mr-3" src="{% static 'images/logoIcon.png' %}" alt="{{ follower.username }}'s Avatar">
+                <span class="text-gray-700">{{ follower.user.first_name }} {{ follower.user.last_name }}</span>
+            </li>
+            {% empty %}
+            <li class="text-gray-500">No followers yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+ <!-- Modal for deleting posts -->
+    
+ {% for post in posts %}
+ <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+     <div class="relative p-4 w-full max-w-md max-h-full">
+         <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+             <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                 </svg>
+                 <span class="sr-only">Close modal</span>
+             </button>
+             
+             
+             <div class="p-4 md:p-5 text-center">
+                 <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                 </svg>
+                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this Post?</h3>
+                 <form method="POST" action="{% url 'delete_post' post.id %}?next=profile">
+                   {% csrf_token %}
+                 <button data-modal-hide="popup-modal-{{ post.id }}" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                     Yes, I'm sure
+                 </button>
+                 <button data-modal-hide="popup-modal-{{ post.id }}" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+             </div>
+           </form>
+         </div>
+     </div>
+ </div>
+ {% endfor %}
+
+ <!-- Modal for editing posts -->
+
+ {% for post in posts %}
+ <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+   <div class="relative p-4 w-full max-w-md max-h-full">
+       <!-- Modal content -->
+       <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+           <!-- Modal header -->
+           <div class="flex items-center justif  y-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+               <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                   Edit This Post
+               </h3>
+               <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                   </svg>
+                   <span class="sr-only">Close modal</span>
+               </button>
+           </div>
+           <!-- Modal body -->
+           <div class="p-4 md:p-5">
+               <form method="POST" class="space-y-4" action="{% url 'edit_post' post.id %}?next=profile">
+               {% csrf_token %}
+                   <div>
+                       <input type="hidden" name="form_type" value="edit_post">
+                       <input type="hidden" name="post_id" value="{{ post.id }}">
+ 
+                       <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Edit Content/Caption</label>                      
+                       <input name="content" id="content" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm 
+                       rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 
+                       dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" 
+                       value="{{ post.content }}" autocomplete="off"></input>
+                       
+                   </div>  
+                   <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Apply Changes</button>
+                   <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                   </div>
+               </form>
+           </div>
+       </div>
+   </div>
+ </div> 
+ 
+     </div>
+ {% endfor %}
+
+
+
+ 
+<!-- Add JS to toggle between tabs -->
+<script>
+
+//script for liking a post
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.like-form').forEach(form => {
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault(); // Prevent normal form submission
+
+            const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            // Perform the fetch request (AJAX)
+            const res = await fetch(form.action, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": csrfToken,
+                    "Accept": "application/json",
+                },
+            });
+
+            // Check if request was successful
+            if (res.ok) {
+                const data = await res.json();
+
+                
+                // Handle success, e.g., toggle the button's text/icon and update the like count based on the response
+                const button = form.querySelector('button');
+                if (data.liked) {
+                    button.innerHTML = `
+                        <svg class="w-6 h-6 text-gray-50 dark:text-white mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z"/>
+                        </svg>
+                        Liked
+                    `;
+                } else {
+                    button.innerHTML = `
+                        <svg class="text-gray-50 dark:text-white mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+                        </svg>
+                        Like
+                    `;
+                }
+
+                // Update the like count dynamically
+                const likeCount = form.closest('.post').querySelector('.like-count');
+                if (likeCount) {
+                    likeCount.textContent = data.likes; // Update the like count directly here
+                }
+            } else {
+                console.error("Error liking the post");
+            }
+        });
+    });
+});
+
+// Function to show the selected tab and hide others
+    function showTab(tabId) {
+        // Hide all tab sections
+        const tabSections = document.querySelectorAll('.tab-section');
+        tabSections.forEach(section => section.classList.add('hidden'));
+        
+        // Show the selected tab
+        const activeTab = document.getElementById(tabId);
+        activeTab.classList.remove('hidden');
+        
+        // Optionally highlight the active tab
+        const tabs = document.querySelectorAll('ul li');
+        tabs.forEach(tab => tab.classList.remove('text-blue-500', 'active'));
+        document.getElementById(tabId + '-tab').classList.add('text-blue-500', 'active');
+    }
+
+    // Default to showing the 'Posts' tab
+    document.addEventListener('DOMContentLoaded', () => {
+        showTab('posts');
+    });
+
+// Script for edit and delete posts
+
+function toggleDropdown(postId) {
+    let dropdown = document.getElementById(`dropdown-${postId}`);
+    dropdown.classList.toggle("hidden");
+}
+
+// Close dropdown when clicking outside
+document.addEventListener("click", function(event) {
+    let dropdowns = document.querySelectorAll("[id^='dropdown-']");
+    dropdowns.forEach(dropdown => {
+        if (!dropdown.contains(event.target) && !event.target.closest("button")) {
+            dropdown.classList.add("hidden");
+        }
+    });
+});
+</script>
+
+
+{% endblock %}
+</body>
+</html>
+
+
+

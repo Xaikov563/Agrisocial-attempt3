@@ -1,0 +1,89 @@
+{% load static %}   
+{% block title %}AgriSocial{% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrisocial Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+
+    {% include 'navbarlanding.html' %}
+
+    {% block content %}
+
+    <!-- Hero Section -->
+    <section class="bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply">
+        <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
+            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+                Online Platform for Local Farmers
+            </h1>
+            <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
+                AgriSocial strives to create a dedicated online community for local farmers to connect, share, and thrive.
+            </p>
+            <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+                <a href="{% url 'register' %}" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+                    Register Now
+                    <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                    </svg>
+                </a>
+                <a href="{% url 'about_us' %}" class="inline-flex justify-center items-center py-3 px-5 sm:ms-4 text-base font-medium text-white border border-white rounded-lg hover:bg-white hover:text-gray-900 focus:ring-4 focus:ring-gray-300">
+                    Learn more
+                </a>  
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="bg-white dark:bg-gray-900 bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern.svg')] dark:bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern-dark.svg')]">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 z-10 relative">
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-green-700 md:text-5xl lg:text-6xl dark:text-white">How it Works</h1>
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-200">Our objective is to engage farmers and passionate individuals about farming and environmental improvements, onto the platform provided with digital tools, education, and networking to enhance their business and income.</p>
+    </div>
+
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-10 text-center">
+                <!-- Step 1 -->
+                <div class="p-6 bg-green-50 rounded-lg shadow">
+                    <div class="text-green-700 text-5xl mb-4">1️⃣</div>
+                    <h3 class="text-xl font-semibold mb-2">Create Your Profile</h3>
+                    <p class="text-gray-600">
+                        Sign up and build your farmer profile. Add your location, crops, tools, and farming experiences.
+                    </p>
+                </div>
+                <!-- Step 2 -->
+                <div class="p-6 bg-green-50 rounded-lg shadow">
+                    <div class="text-green-700 text-5xl mb-4">2️⃣</div>
+                    <h3 class="text-xl font-semibold mb-2">Connect & Share</h3>
+                    <p class="text-gray-600">
+                        Follow other farmers, share updates, and join discussions about agricultural practices and challenges.
+                    </p>
+                </div>
+                <!-- Step 3 -->
+                <div class="p-6 bg-green-50 rounded-lg shadow">
+                    <div class="text-green-700 text-5xl mb-4">3️⃣</div>
+                    <h3 class="text-xl font-semibold mb-2">Grow & Sell</h3>
+                    <p class="text-gray-600">
+                        Use our built-in tools to advertise your products, find buyers, and grow your farming business.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <h6 style="text-align: center; font-size: 3rem; font-weight:bold; margin-top: 6rem; margin-bottom: 2rem;"></h6>
+
+    </section>
+    
+
+    {% endblock %}
+
+    {% include 'footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+</body>
+</html>
